@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzit.dao.ProductImageMapper" >
+  <resultMap id="BaseResultMap" type="com.hzit.pojo.ProductImage" >
+    <id column="image_id" property="imageId" jdbcType="INTEGER" />
+    <result column="product_id" property="productId" jdbcType="VARCHAR" />
+    <result column="big_img_path" property="bigImgPath" jdbcType="VARCHAR" />
+    <result column="small_img_path" property="smallImgPath" jdbcType="VARCHAR" />
+    <result column="is_cover" property="isCover" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="add_person_id" property="addPersonId" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="modify_user_id" property="modifyUserId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    image_id, product_id, big_img_path, small_img_path, is_cover, create_time, add_person_id, 
+    update_time, modify_user_id, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from product_image
+    where image_id = #{imageId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product_image
+    where image_id = #{imageId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hzit.pojo.ProductImage" >
+    insert into product_image (image_id, product_id, big_img_path, 
+      small_img_path, is_cover, create_time, 
+      add_person_id, update_time, modify_user_id, 
+      status)
+    values (#{imageId,jdbcType=INTEGER}, #{productId,jdbcType=VARCHAR}, #{bigImgPath,jdbcType=VARCHAR}, 
+      #{smallImgPath,jdbcType=VARCHAR}, #{isCover,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{addPersonId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{modifyUserId,jdbcType=INTEGER}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzit.pojo.ProductImage" >
+    insert into product_image
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="imageId != null" >
+        image_id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="bigImgPath != null" >
+        big_img_path,
+      </if>
+      <if test="smallImgPath != null" >
+        small_img_path,
+      </if>
+      <if test="isCover != null" >
+        is_cover,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="addPersonId != null" >
+        add_person_id,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="modifyUserId != null" >
+        modify_user_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="imageId != null" >
+        #{imageId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="bigImgPath != null" >
+        #{bigImgPath,jdbcType=VARCHAR},
+      </if>
+      <if test="smallImgPath != null" >
+        #{smallImgPath,jdbcType=VARCHAR},
+      </if>
+      <if test="isCover != null" >
+        #{isCover,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addPersonId != null" >
+        #{addPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUserId != null" >
+        #{modifyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzit.pojo.ProductImage" >
+    update product_image
+    <set >
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="bigImgPath != null" >
+        big_img_path = #{bigImgPath,jdbcType=VARCHAR},
+      </if>
+      <if test="smallImgPath != null" >
+        small_img_path = #{smallImgPath,jdbcType=VARCHAR},
+      </if>
+      <if test="isCover != null" >
+        is_cover = #{isCover,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addPersonId != null" >
+        add_person_id = #{addPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUserId != null" >
+        modify_user_id = #{modifyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where image_id = #{imageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzit.pojo.ProductImage" >
+    update product_image
+    set product_id = #{productId,jdbcType=VARCHAR},
+      big_img_path = #{bigImgPath,jdbcType=VARCHAR},
+      small_img_path = #{smallImgPath,jdbcType=VARCHAR},
+      is_cover = #{isCover,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      add_person_id = #{addPersonId,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      modify_user_id = #{modifyUserId,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT}
+    where image_id = #{imageId,jdbcType=INTEGER}
+  </update>
+</mapper>

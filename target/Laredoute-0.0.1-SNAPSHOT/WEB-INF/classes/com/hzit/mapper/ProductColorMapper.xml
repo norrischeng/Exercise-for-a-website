@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzit.dao.ProductColorMapper">
+
+<select id="color" resultType="map">
+SELECT color_type,color_id FROM product_color WHERE product_id=#{productId}
+</select>
+
+<insert id="addInfo" parameterType="com.hzit.pojo.ProductColor">insert into product_color (product_id,color_type,creat_time,add_person_id) values(#{productId},#{colorType},NOW(),#{addPersonId})</insert>
+
+<delete id="delInfo" parameterType="int">delete from product_color where color_id=#{colorId}</delete>
+
+<select id="colorAll" resultType="map">select product_id,color_type,creat_time,add_person_id from product_color where product_id=#{productId}</select>
+
+<select id="reType" resultType="map">select pc.product_id,pd.color_id, ps.size_name,pc.size_id,pd.color_type FROM product_specification  as pc INNER JOIN product_size as ps ON pc.size_id=ps.size_id
+INNER JOIN product_color  as pd ON pc.color_id=pd.color_id WHERE ps.product_id=#{productId} AND pd.color_id=#{colorId}</select>
+
+</mapper>

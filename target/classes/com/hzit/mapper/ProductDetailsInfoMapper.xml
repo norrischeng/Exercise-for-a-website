@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzit.dao.ProductDetailsInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.hzit.pojo.ProductDetailsInfo" >
+    <id column="product_id" property="productId" jdbcType="VARCHAR" />
+    <result column="commodity_origin" property="commodityOrigin" jdbcType="VARCHAR" />
+    <result column="style" property="style" jdbcType="VARCHAR" />
+    <result column="pattern" property="pattern" jdbcType="VARCHAR" />
+    <result column="Process" property="process" jdbcType="VARCHAR" />
+    <result column="version_type" property="versionType" jdbcType="VARCHAR" />
+    <result column="item_number" property="itemNumber" jdbcType="VARCHAR" />
+    <result column="types_of" property="typesOf" jdbcType="VARCHAR" />
+    <result column="colour" property="colour" jdbcType="VARCHAR" />
+    <result column="crowd" property="crowd" jdbcType="VARCHAR" />
+    <result column="time_to_market" property="timeToMarket" jdbcType="VARCHAR" />
+    <result column="collar" property="collar" jdbcType="VARCHAR" />
+    <result column="main_material" property="mainMaterial" jdbcType="VARCHAR" />
+    <result column="applicable_season" property="applicableSeason" jdbcType="VARCHAR" />
+    <result column="goods_weight" property="goodsWeight" jdbcType="VARCHAR" />
+    <result column="scene" property="scene" jdbcType="VARCHAR" />
+    <result column="popular_elements" property="popularElements" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="add_person_id" property="addPersonId" jdbcType="INTEGER" />
+    <result column="change_time" property="changeTime" jdbcType="TIMESTAMP" />
+    <result column="modify_user_id" property="modifyUserId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    product_id, commodity_origin, style, pattern, Process, version_type, item_number, 
+    types_of, colour, crowd, time_to_market, collar, main_material, applicable_season, 
+    goods_weight, scene, popular_elements, create_time, add_person_id, change_time, modify_user_id, 
+    status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from product_details_info
+    where product_id = #{productId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from product_details_info
+    where product_id = #{productId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hzit.pojo.ProductDetailsInfo" >
+    insert into product_details_info (product_id, commodity_origin, style, 
+      pattern, Process, version_type, 
+      item_number, types_of, colour, 
+      crowd, time_to_market, collar, 
+      main_material, applicable_season, goods_weight, 
+      scene, popular_elements, create_time, 
+      add_person_id, change_time, modify_user_id, 
+      status)
+    values (#{productId,jdbcType=VARCHAR}, #{commodityOrigin,jdbcType=VARCHAR}, #{style,jdbcType=VARCHAR}, 
+      #{pattern,jdbcType=VARCHAR}, #{process,jdbcType=VARCHAR}, #{versionType,jdbcType=VARCHAR}, 
+      #{itemNumber,jdbcType=VARCHAR}, #{typesOf,jdbcType=VARCHAR}, #{colour,jdbcType=VARCHAR}, 
+      #{crowd,jdbcType=VARCHAR}, #{timeToMarket,jdbcType=VARCHAR}, #{collar,jdbcType=VARCHAR}, 
+      #{mainMaterial,jdbcType=VARCHAR}, #{applicableSeason,jdbcType=VARCHAR}, #{goodsWeight,jdbcType=VARCHAR}, 
+      #{scene,jdbcType=VARCHAR}, #{popularElements,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{addPersonId,jdbcType=INTEGER}, #{changeTime,jdbcType=TIMESTAMP}, #{modifyUserId,jdbcType=INTEGER}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzit.pojo.ProductDetailsInfo" >
+    insert into product_details_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="commodityOrigin != null" >
+        commodity_origin,
+      </if>
+      <if test="style != null" >
+        style,
+      </if>
+      <if test="pattern != null" >
+        pattern,
+      </if>
+      <if test="process != null" >
+        Process,
+      </if>
+      <if test="versionType != null" >
+        version_type,
+      </if>
+      <if test="itemNumber != null" >
+        item_number,
+      </if>
+      <if test="typesOf != null" >
+        types_of,
+      </if>
+      <if test="colour != null" >
+        colour,
+      </if>
+      <if test="crowd != null" >
+        crowd,
+      </if>
+      <if test="timeToMarket != null" >
+        time_to_market,
+      </if>
+      <if test="collar != null" >
+        collar,
+      </if>
+      <if test="mainMaterial != null" >
+        main_material,
+      </if>
+      <if test="applicableSeason != null" >
+        applicable_season,
+      </if>
+      <if test="goodsWeight != null" >
+        goods_weight,
+      </if>
+      <if test="scene != null" >
+        scene,
+      </if>
+      <if test="popularElements != null" >
+        popular_elements,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="addPersonId != null" >
+        add_person_id,
+      </if>
+      <if test="changeTime != null" >
+        change_time,
+      </if>
+      <if test="modifyUserId != null" >
+        modify_user_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productId != null" >
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityOrigin != null" >
+        #{commodityOrigin,jdbcType=VARCHAR},
+      </if>
+      <if test="style != null" >
+        #{style,jdbcType=VARCHAR},
+      </if>
+      <if test="pattern != null" >
+        #{pattern,jdbcType=VARCHAR},
+      </if>
+      <if test="process != null" >
+        #{process,jdbcType=VARCHAR},
+      </if>
+      <if test="versionType != null" >
+        #{versionType,jdbcType=VARCHAR},
+      </if>
+      <if test="itemNumber != null" >
+        #{itemNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="typesOf != null" >
+        #{typesOf,jdbcType=VARCHAR},
+      </if>
+      <if test="colour != null" >
+        #{colour,jdbcType=VARCHAR},
+      </if>
+      <if test="crowd != null" >
+        #{crowd,jdbcType=VARCHAR},
+      </if>
+      <if test="timeToMarket != null" >
+        #{timeToMarket,jdbcType=VARCHAR},
+      </if>
+      <if test="collar != null" >
+        #{collar,jdbcType=VARCHAR},
+      </if>
+      <if test="mainMaterial != null" >
+        #{mainMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="applicableSeason != null" >
+        #{applicableSeason,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsWeight != null" >
+        #{goodsWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="scene != null" >
+        #{scene,jdbcType=VARCHAR},
+      </if>
+      <if test="popularElements != null" >
+        #{popularElements,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addPersonId != null" >
+        #{addPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="changeTime != null" >
+        #{changeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUserId != null" >
+        #{modifyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzit.pojo.ProductDetailsInfo" >
+    update product_details_info
+    <set >
+      <if test="commodityOrigin != null" >
+        commodity_origin = #{commodityOrigin,jdbcType=VARCHAR},
+      </if>
+      <if test="style != null" >
+        style = #{style,jdbcType=VARCHAR},
+      </if>
+      <if test="pattern != null" >
+        pattern = #{pattern,jdbcType=VARCHAR},
+      </if>
+      <if test="process != null" >
+        Process = #{process,jdbcType=VARCHAR},
+      </if>
+      <if test="versionType != null" >
+        version_type = #{versionType,jdbcType=VARCHAR},
+      </if>
+      <if test="itemNumber != null" >
+        item_number = #{itemNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="typesOf != null" >
+        types_of = #{typesOf,jdbcType=VARCHAR},
+      </if>
+      <if test="colour != null" >
+        colour = #{colour,jdbcType=VARCHAR},
+      </if>
+      <if test="crowd != null" >
+        crowd = #{crowd,jdbcType=VARCHAR},
+      </if>
+      <if test="timeToMarket != null" >
+        time_to_market = #{timeToMarket,jdbcType=VARCHAR},
+      </if>
+      <if test="collar != null" >
+        collar = #{collar,jdbcType=VARCHAR},
+      </if>
+      <if test="mainMaterial != null" >
+        main_material = #{mainMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="applicableSeason != null" >
+        applicable_season = #{applicableSeason,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsWeight != null" >
+        goods_weight = #{goodsWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="scene != null" >
+        scene = #{scene,jdbcType=VARCHAR},
+      </if>
+      <if test="popularElements != null" >
+        popular_elements = #{popularElements,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addPersonId != null" >
+        add_person_id = #{addPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="changeTime != null" >
+        change_time = #{changeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUserId != null" >
+        modify_user_id = #{modifyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where product_id = #{productId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzit.pojo.ProductDetailsInfo" >
+    update product_details_info
+    set commodity_origin = #{commodityOrigin,jdbcType=VARCHAR},
+      style = #{style,jdbcType=VARCHAR},
+      pattern = #{pattern,jdbcType=VARCHAR},
+      Process = #{process,jdbcType=VARCHAR},
+      version_type = #{versionType,jdbcType=VARCHAR},
+      item_number = #{itemNumber,jdbcType=VARCHAR},
+      types_of = #{typesOf,jdbcType=VARCHAR},
+      colour = #{colour,jdbcType=VARCHAR},
+      crowd = #{crowd,jdbcType=VARCHAR},
+      time_to_market = #{timeToMarket,jdbcType=VARCHAR},
+      collar = #{collar,jdbcType=VARCHAR},
+      main_material = #{mainMaterial,jdbcType=VARCHAR},
+      applicable_season = #{applicableSeason,jdbcType=VARCHAR},
+      goods_weight = #{goodsWeight,jdbcType=VARCHAR},
+      scene = #{scene,jdbcType=VARCHAR},
+      popular_elements = #{popularElements,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      add_person_id = #{addPersonId,jdbcType=INTEGER},
+      change_time = #{changeTime,jdbcType=TIMESTAMP},
+      modify_user_id = #{modifyUserId,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT}
+    where product_id = #{productId,jdbcType=VARCHAR}
+  </update>
+</mapper>

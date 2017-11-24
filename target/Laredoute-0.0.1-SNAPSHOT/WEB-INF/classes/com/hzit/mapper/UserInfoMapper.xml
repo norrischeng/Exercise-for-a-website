@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzit.dao.UserInfoMapper">
+	<select id="selectUSerInfoMailbox" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT mailbox from user_info where mailbox=#{mailbox};
+	</select>
+	
+	 <insert id="register" parameterType="java.util.Map">
+		insert into user_info(mailbox,`password`) value(#{email},#{password});
+	</insert> 
+	
+	<select id="login" parameterType="java.util.Map" resultType="map">
+		select user_id as userId,mailbox,password from user_info where mailbox=#{email}  and `password`=#{password} ;
+	</select>
+</mapper>

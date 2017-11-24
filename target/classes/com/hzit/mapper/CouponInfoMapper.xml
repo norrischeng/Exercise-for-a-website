@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzit.dao.CouponInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.hzit.pojo.CouponInfo" >
+    <id column="coupon_id" property="couponId" jdbcType="INTEGER" />
+    <result column="coupon_time" property="couponTime" jdbcType="VARCHAR" />
+    <result column="coupon_price" property="couponPrice" jdbcType="DECIMAL" />
+    <result column="valid_period" property="validPeriod" jdbcType="TIMESTAMP" />
+    <result column="claim" property="claim" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="add_person_id" property="addPersonId" jdbcType="INTEGER" />
+    <result column="change_time" property="changeTime" jdbcType="TIMESTAMP" />
+    <result column="modify_user_id" property="modifyUserId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    coupon_id, coupon_time, coupon_price, valid_period, claim, add_time, add_person_id, 
+    change_time, modify_user_id, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from coupon_info
+    where coupon_id = #{couponId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from coupon_info
+    where coupon_id = #{couponId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hzit.pojo.CouponInfo" >
+    insert into coupon_info (coupon_id, coupon_time, coupon_price, 
+      valid_period, claim, add_time, 
+      add_person_id, change_time, modify_user_id, 
+      status)
+    values (#{couponId,jdbcType=INTEGER}, #{couponTime,jdbcType=VARCHAR}, #{couponPrice,jdbcType=DECIMAL}, 
+      #{validPeriod,jdbcType=TIMESTAMP}, #{claim,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, 
+      #{addPersonId,jdbcType=INTEGER}, #{changeTime,jdbcType=TIMESTAMP}, #{modifyUserId,jdbcType=INTEGER}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzit.pojo.CouponInfo" >
+    insert into coupon_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="couponId != null" >
+        coupon_id,
+      </if>
+      <if test="couponTime != null" >
+        coupon_time,
+      </if>
+      <if test="couponPrice != null" >
+        coupon_price,
+      </if>
+      <if test="validPeriod != null" >
+        valid_period,
+      </if>
+      <if test="claim != null" >
+        claim,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="addPersonId != null" >
+        add_person_id,
+      </if>
+      <if test="changeTime != null" >
+        change_time,
+      </if>
+      <if test="modifyUserId != null" >
+        modify_user_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="couponId != null" >
+        #{couponId,jdbcType=INTEGER},
+      </if>
+      <if test="couponTime != null" >
+        #{couponTime,jdbcType=VARCHAR},
+      </if>
+      <if test="couponPrice != null" >
+        #{couponPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="validPeriod != null" >
+        #{validPeriod,jdbcType=TIMESTAMP},
+      </if>
+      <if test="claim != null" >
+        #{claim,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addPersonId != null" >
+        #{addPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="changeTime != null" >
+        #{changeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUserId != null" >
+        #{modifyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzit.pojo.CouponInfo" >
+    update coupon_info
+    <set >
+      <if test="couponTime != null" >
+        coupon_time = #{couponTime,jdbcType=VARCHAR},
+      </if>
+      <if test="couponPrice != null" >
+        coupon_price = #{couponPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="validPeriod != null" >
+        valid_period = #{validPeriod,jdbcType=TIMESTAMP},
+      </if>
+      <if test="claim != null" >
+        claim = #{claim,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addPersonId != null" >
+        add_person_id = #{addPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="changeTime != null" >
+        change_time = #{changeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUserId != null" >
+        modify_user_id = #{modifyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where coupon_id = #{couponId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzit.pojo.CouponInfo" >
+    update coupon_info
+    set coupon_time = #{couponTime,jdbcType=VARCHAR},
+      coupon_price = #{couponPrice,jdbcType=DECIMAL},
+      valid_period = #{validPeriod,jdbcType=TIMESTAMP},
+      claim = #{claim,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      add_person_id = #{addPersonId,jdbcType=INTEGER},
+      change_time = #{changeTime,jdbcType=TIMESTAMP},
+      modify_user_id = #{modifyUserId,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT}
+    where coupon_id = #{couponId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzit.dao.ProductDetailsMapper" >
+  <resultMap id="BaseResultMap" type="com.hzit.pojo.ProductDetails" >
+    <id column="detail_id" property="detailId" jdbcType="INTEGER" />
+    <result column="product_id" property="productId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="add_person_id" property="addPersonId" jdbcType="INTEGER" />
+    <result column="change_time" property="changeTime" jdbcType="TIMESTAMP" />
+    <result column="modify_user_id" property="modifyUserId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hzit.pojo.ProductDetails" extends="BaseResultMap" >
+    <result column="product_details" property="productDetails" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    detail_id, product_id, create_time, add_person_id, change_time, modify_user_id, status
+  </sql>
+  <sql id="Blob_Column_List" >
+    product_details
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from product_details
+    where detail_id = #{detailId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product_details
+    where detail_id = #{detailId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hzit.pojo.ProductDetails" >
+    insert into product_details (detail_id, product_id, create_time, 
+      add_person_id, change_time, modify_user_id, 
+      status, product_details)
+    values (#{detailId,jdbcType=INTEGER}, #{productId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{addPersonId,jdbcType=INTEGER}, #{changeTime,jdbcType=TIMESTAMP}, #{modifyUserId,jdbcType=INTEGER}, 
+      #{status,jdbcType=TINYINT}, #{productDetails,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzit.pojo.ProductDetails" >
+    insert into product_details
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="detailId != null" >
+        detail_id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="addPersonId != null" >
+        add_person_id,
+      </if>
+      <if test="changeTime != null" >
+        change_time,
+      </if>
+      <if test="modifyUserId != null" >
+        modify_user_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="productDetails != null" >
+        product_details,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="detailId != null" >
+        #{detailId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addPersonId != null" >
+        #{addPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="changeTime != null" >
+        #{changeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUserId != null" >
+        #{modifyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="productDetails != null" >
+        #{productDetails,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzit.pojo.ProductDetails" >
+    update product_details
+    <set >
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addPersonId != null" >
+        add_person_id = #{addPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="changeTime != null" >
+        change_time = #{changeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUserId != null" >
+        modify_user_id = #{modifyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="productDetails != null" >
+        product_details = #{productDetails,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where detail_id = #{detailId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hzit.pojo.ProductDetails" >
+    update product_details
+    set product_id = #{productId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      add_person_id = #{addPersonId,jdbcType=INTEGER},
+      change_time = #{changeTime,jdbcType=TIMESTAMP},
+      modify_user_id = #{modifyUserId,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      product_details = #{productDetails,jdbcType=LONGVARCHAR}
+    where detail_id = #{detailId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzit.pojo.ProductDetails" >
+    update product_details
+    set product_id = #{productId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      add_person_id = #{addPersonId,jdbcType=INTEGER},
+      change_time = #{changeTime,jdbcType=TIMESTAMP},
+      modify_user_id = #{modifyUserId,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT}
+    where detail_id = #{detailId,jdbcType=INTEGER}
+  </update>
+</mapper>

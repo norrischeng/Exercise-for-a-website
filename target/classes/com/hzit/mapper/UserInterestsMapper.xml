@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzit.dao.UserInterestsMapper" >
+  <resultMap id="BaseResultMap" type="com.hzit.pojo.UserInterests" >
+    <id column="interest_id" property="interestId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="interest" property="interest" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="add_person_id" property="addPersonId" jdbcType="INTEGER" />
+    <result column="change_time" property="changeTime" jdbcType="TIMESTAMP" />
+    <result column="modify_user_id" property="modifyUserId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    interest_id, user_id, interest, add_time, add_person_id, change_time, modify_user_id, 
+    status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_interests
+    where interest_id = #{interestId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_interests
+    where interest_id = #{interestId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hzit.pojo.UserInterests" >
+    insert into user_interests (interest_id, user_id, interest, 
+      add_time, add_person_id, change_time, 
+      modify_user_id, status)
+    values (#{interestId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{interest,jdbcType=VARCHAR}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{addPersonId,jdbcType=INTEGER}, #{changeTime,jdbcType=TIMESTAMP}, 
+      #{modifyUserId,jdbcType=INTEGER}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzit.pojo.UserInterests" >
+    insert into user_interests
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="interestId != null" >
+        interest_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="interest != null" >
+        interest,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="addPersonId != null" >
+        add_person_id,
+      </if>
+      <if test="changeTime != null" >
+        change_time,
+      </if>
+      <if test="modifyUserId != null" >
+        modify_user_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="interestId != null" >
+        #{interestId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="interest != null" >
+        #{interest,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addPersonId != null" >
+        #{addPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="changeTime != null" >
+        #{changeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUserId != null" >
+        #{modifyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzit.pojo.UserInterests" >
+    update user_interests
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="interest != null" >
+        interest = #{interest,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addPersonId != null" >
+        add_person_id = #{addPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="changeTime != null" >
+        change_time = #{changeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUserId != null" >
+        modify_user_id = #{modifyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where interest_id = #{interestId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzit.pojo.UserInterests" >
+    update user_interests
+    set user_id = #{userId,jdbcType=INTEGER},
+      interest = #{interest,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      add_person_id = #{addPersonId,jdbcType=INTEGER},
+      change_time = #{changeTime,jdbcType=TIMESTAMP},
+      modify_user_id = #{modifyUserId,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT}
+    where interest_id = #{interestId,jdbcType=INTEGER}
+  </update>
+</mapper>

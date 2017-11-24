@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzit.dao.SearchPagingMapper">
+
+	<!-- 根据类别id查询 分页展示 -->
+	<select id="findPage" parameterType="map" resultType="map">
+		SELECT
+		p.product_id,p.product_name,p.price,p.discount,c.category_name,color.color_type
+		from
+		product as p
+		INNER JOIN category as c
+		ON p.category_id=c.category_id
+		inner join product_color as color
+		on color.product_id=p.product_id
+		<if test="end eq 0">
+		 where p.category_id=#{categoryId}
+		</if>
+		<if test="end neq 0">
+		 where p.category_id between #{categoryId} and #{end}
+		</if>
+		 
+		limit
+		#{indexPage},24
+	</select>
+
+	<!-- 查询商品数量 -->
+	<select id="findCount" parameterType="map" resultType="int">
+		SELECT
+		count(*) from product as p
+		INNER JOIN category as c
+		ON
+		p.category_id=c.category_id
+
+	</select>
+
+	<!-- 
+	<select id="findColorCount" parameterType="map" resultType="int">
+		select
+		count(*) from product_color
+		where product_id=${productId }
+	</select>
+	查询颜色数量 -->
+</mapper>

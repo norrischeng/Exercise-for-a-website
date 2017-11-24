@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+							http://www.springframework.org/schema/beans/spring-beans.xsd   
+							http://www.springframework.org/schema/aop   
+							http://www.springframework.org/schema/aop/spring-aop.xsd   
+							http://www.springframework.org/schema/tx   
+							http://www.springframework.org/schema/tx/spring-tx.xsd   
+							http://www.springframework.org/schema/context   
+							http://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- 引用外部文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties" />
+	<!-- 配置数据源 -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<!-- 不使用properties来配置 -->
+		<!-- <property name="driverClassName" value="com.mysql.jdbc.Driver" /> 
+			<property name="url" value="jdbc:mysql://localhost:3306/learning" /> <property 
+			name="username" value="root" /> <property name="password" value="christmas258@" 
+			/> -->
+		<!-- 使用properties来配置 -->
+		<property name="driverClassName">
+			<value>${jdbc.driverClassName}</value>
+		</property>
+		<property name="url">
+			<value>${jdbc.url}</value>
+		</property>
+		<property name="username">
+			<value>${jdbc.username}</value>
+		</property>
+		<property name="password">
+			<value>${jdbc.password}</value>
+		</property>
+	</bean>
+
+	<!-- Spring集成MyBatis -->
+	<!-- Spring扫描所有的mapper文件 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- Mappper所在的包路径com.ljh.tr.mapper -->
+		<property name="mapperLocations" value="classpath:com/hzit/mapper/*.xml" />
+	</bean>
+	<!-- spring扫描DAO包 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- DAO包所在的包路径 --><!-- 扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开 -->
+		<property name="basePackage" value="com.hzit.dao" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean>
+	<!-- 开启事务 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<!-- <tx:advice id="txAdvice" transaction-manager="transactionManager"> 
+		<tx:attributes> 传播行为 <tx:method name="add*" propagation="REQUIRED" rollback-for="java.lang.Exception"/> 
+		<tx:method name="insert*" propagation="REQUIRED" rollback-for="java.lang.Exception"/> 
+		<tx:method name="save*" propagation="REQUIRED" rollback-for="java.lang.Exception"/> 
+		<tx:method name="update*" propagation="REQUIRED" rollback-for="java.lang.Exception"/> 
+		<tx:method name="delete*" propagation="REQUIRED" rollback-for="java.lang.Exception"/> 
+		<tx:method name="remove*" propagation="REQUIRED" rollback-for="java.lang.Exception"/> 
+		<tx:method name="find*" propagation="SUPPORTS" rollback-for="java.lang.Exception"/> 
+		<tx:method name="load*" propagation="SUPPORTS" rollback-for="java.lang.Exception"/> 
+		<tx:method name="search*" propagation="SUPPORTS" rollback-for="java.lang.Exception"/> 
+		<tx:method name="*" propagation="SUPPORTS" rollback-for="java.lang.Exception"/> 
+		</tx:attributes> </tx:advice> -->
+
+	<!-- 注解方式配置事务 -->
+	<tx:annotation-driven proxy-target-class="false"
+		transaction-manager="transactionManager" />
+
+	<!-- 配置切面 -->
+	<aop:config>
+		<!-- 事务入口 -->
+		<aop:pointcut expression="execution(* com.hzit.services.*.*(..))"
+			id="transactionPointcut" />
+		<!-- 将事务通知与切入点组合 -->
+		<aop:advisor advice-ref="transactionManager" pointcut-ref="transactionPointcut" />
+	</aop:config>
+</beans>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzit.dao.MailingAddressMapper" >
+
+<select id="selectAll" resultType="com.hzit.pojo.MailingAddress">
+select id,user_name as userName,user_phone as userPhone,user_address as userAddress,region,city from mailingaddress
+where user_id=#{userId}
+</select>
+
+<delete id="delAddress" parameterType="int">
+
+delete from mailingaddress where id=#{id};
+</delete>
+
+<update id="updateAddress" parameterType="map">
+ update mailingaddress set
+        nationNoUse = #{nationNoUse},
+        region = #{region},
+        city = #{city},
+        county = #{county},
+        user_address = #{userAddress},
+        postcode = #{postcode},
+        user_name = #{userName},
+        user_phone = #{userPhone},
+        useremail = #{useremail}
+    where id = #{id}
+
+
+</update>
+
+
+  <insert id="insertSelective" parameterType="com.hzit.pojo.MailingAddress">
+    insert into mailingaddress
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userAddress != null" >
+        user_address,
+      </if>
+      <if test="userPhone != null" >
+        user_phone,
+      </if>
+      <if test="desc != null" >
+        desc,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="isDefault != null" >
+        is_default,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="addPersonId != null" >
+        add_person_id,
+      </if>
+      <if test="changeTime != null" >
+        change_time,
+      </if>
+      <if test="modifyUserId != null" >
+        modify_user_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="postcode != null" >
+        postcode,
+      </if>
+      <if test="useremail != null" >
+        useremail,
+      </if>
+      <if test="nationNoUse != null" >
+        nationNoUse,
+      </if>
+      <if test="region != null" >
+        region,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="county != null" >
+        county
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="userId != null" >
+        #{userId},
+      </if>
+      <if test="userName != null" >
+        #{userName},
+      </if>
+      <if test="userAddress != null" >
+        #{userAddress},
+      </if>
+      <if test="userPhone != null" >
+        #{userPhone},
+      </if>
+      <if test="desc != null" >
+        #{desc},
+      </if>
+      <if test="remarks != null" >
+        #{remarks},
+      </if>
+      <if test="isDefault != null" >
+        #{isDefault},
+      </if>
+      <if test="addTime != null" >
+        #{addTime},
+      </if>
+      <if test="addPersonId != null" >
+        #{addPersonId},
+      </if>
+      <if test="changeTime != null" >
+        #{changeTime},
+      </if>
+      <if test="modifyUserId != null" >
+        #{modifyUserId},
+      </if>
+      <if test="status != null" >
+        #{status},
+      </if>
+       <if test="postcode != null" >
+        #{postcode},
+      </if>
+       <if test="useremail != null" >
+        #{useremail},
+      </if>
+          <if test="nationNoUse != null" >
+       	#{nationNoUse} ,
+      </if>
+      <if test="region != null" >
+        #{region},
+      </if>
+      <if test="city != null" >
+        #{city},
+      </if>
+      <if test="county != null" >
+        #{county}
+      </if>
+    </trim>
+  </insert>
+
+</mapper>
